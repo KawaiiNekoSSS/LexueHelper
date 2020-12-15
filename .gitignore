@@ -1,2 +1,5 @@
 .idea/
 LexueHelper.iml
+*.iml
+out/
+lib/
