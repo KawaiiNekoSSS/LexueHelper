@@ -3,3 +3,4 @@ LexueHelper.iml
 *.iml
 out/
 lib/
+test/
