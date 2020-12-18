@@ -1,4 +1,4 @@
-package bit.local.runner;
+package bit.local.compiler;
 
 public enum CompileStatus {
     CANNOT_CREATE_SOURCE_FILE,

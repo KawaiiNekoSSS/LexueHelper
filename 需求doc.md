@@ -31,7 +31,7 @@
   - bit.lexue.tester.* // JUnit5单元测试
 - Local
   - bit.local.tools.* // 比对工具、对拍工具
-  - bit.local.runner.* // 编译、运行
+  - bit.local.compiler.* // 编译、运行
   - bit.local.tester.* // JUnit5单元测试
 - GUI
   - bit.GUI.mainscene.*

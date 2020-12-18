@@ -1,11 +1,9 @@
 package bit.local.tester;
 
-import bit.local.runner.GCCCompiler;
+import bit.local.compiler.GCCCompiler;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GCCCompilerTest {
 

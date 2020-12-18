@@ -1,12 +1,9 @@
-package bit.local.runner;
+package bit.local.compiler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.nio.file.*;
-import java.util.*;
-import java.util.stream.Collectors;
 
 import bit.local.tools.SourceFileMaker;
 
@@ -68,6 +65,9 @@ public class GCCCompiler implements ICompiler {
         this.errLine = errLineBuf.toString();
         System.out.println(correctLine);
         System.out.println(errLine);
+        reader.close();
+        errreader.close();
+        process.destroy();
         checkStatus();
     }
 
@@ -80,6 +80,10 @@ public class GCCCompiler implements ICompiler {
         } else {
             status = CompileStatus.COMPILE_FAILED;
         }
+    }
+
+    public String getTargetDict() {
+        return this.targetDict;
     }
 
 }
