@@ -21,6 +21,7 @@ public class FilesInfoAttainer {
         }
     }
     public static boolean judgeFileEquals(Path file1, Path file2, IgnoreMode mode) throws IOException {
+        System.out.println("Start Compare!");
         String s1 = readStringFromFiles(file1);
         String s2 = readStringFromFiles(file2);
         var comparator = new TextComparator(mode, s1);

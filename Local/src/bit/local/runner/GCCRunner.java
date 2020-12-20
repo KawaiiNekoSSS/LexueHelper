@@ -3,7 +3,9 @@ package bit.local.runner;
 import bit.local.compiler.CompileStatus;
 import bit.local.compiler.GCCCompiler;
 import bit.local.runner.runtimeexception.ExceptionInRun;
+import bit.local.runner.runtimeexception.RuntimeErrorException;
 import bit.local.runner.runtimeexception.TimeLimitExceedException;
+import bit.local.tools.SourceFileMaker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,14 +26,10 @@ import java.time.LocalDateTime;
 public class GCCRunner extends CompiledLanguagerRunner{
 
     /**
-     * 源代码、输入、输出
+     * 源代码、输入
      */
-    private String srcCode, in, out;
+    private String srcCode, in;
 
-    /**
-     * 输出目录
-     */
-    private String dict;
     /**
      * 运行时限
      */
@@ -44,43 +42,42 @@ public class GCCRunner extends CompiledLanguagerRunner{
      * 运行最大输出限制
      */
     private int maxOutputSizeLimit = 114514;
-
     /**
-     *
-     * @param srcCode 源代码
-     * @param in  标准
-     * @param out 标准输出
+     * 输出文件文件名
      */
-    
-    public GCCRunner (String srcCode, String in, String out) {
-        this.srcCode = srcCode;
-        this.in = in;
-        this.out = out;
-    }
+    private String outputFileName = "a.out";
+    /**
+     * 输出文件的path
+     */
+    private Path outputFilePath;
+    /**
+     * 运行的返回结果
+     */
+    private int runExitValue;
+
+    private int status = 0;
 
     /**
      *
      * @param timeLimit 时间限制
      * @param memoryLimit  空间限制
      */
-    public GCCRunner (String srcCode, String in, String out, int timeLimit, int memoryLimit) {
-        this.srcCode = srcCode;
+    public GCCRunner (String runDict, String in, int timeLimit, int memoryLimit) {
+        this.dict = runDict;
         this.in = in;
-        this.out = out;
         this.timeLimit = timeLimit;
         this.memoryLimit = memoryLimit;
     }
 
     /**
-     * 调用编译器进行编译。
-     * @throws IOException  会抛出IO异常
+     *
+     * @param outputFileName 输出文件名
      */
 
-    @Override
-    public void compile() throws IOException {
-        GCCCompiler compiler = new GCCCompiler();
-        compiler.compile(srcCode);
-        dict = compiler.getTargetDict();
+    public  GCCRunner (String runDict, String in, String outputFileName) {
+        this.dict = runDict;
+        this.in = in;
+        this.outputFileName = outputFileName;
     }
 
     /**
@@ -88,10 +85,6 @@ public class GCCRunner extends CompiledLanguagerRunner{
      * @return  编译状态。
      */
 
-    @Override
-    public CompileStatus checkCompileStatus() {
-        return this.status;
-    }
 
     /**
      * 核心的运行函数。
@@ -112,19 +105,32 @@ public class GCCRunner extends CompiledLanguagerRunner{
 
         BufferedReader testout = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader errout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        StringBuffer buf = new StringBuffer();
+        int byteEle;
+        String errLine;
+        StringBuffer wrongbuf = new StringBuffer();
 
+        outputFilePath = Paths.get(dict).getParent().resolve(outputFileName);
+        var outBuf = Files.newBufferedWriter(outputFilePath, StandardCharsets.UTF_8);
         try {
-            while (process.isAlive()) {
+            while (true) {
                 if (testout.ready()) {
-                    line = testout.readLine();
+                    byteEle = testout.read();
+                    System.out.print(byteEle);
+                    outBuf.write(byteEle);
+                    outBuf.flush();
                     continue;
                 }
                 if (errout.ready()) {
-                    line = errout.readLine();
-                    System.out.println(line);
+                    errLine = errout.readLine();
+                    wrongbuf.append(errLine).append('\n');
                     continue;
+                }
+                if (process != null) {
+                    try {
+                        runExitValue = process.exitValue();
+                        break;
+                    } catch (IllegalThreadStateException e) {
+                    }
                 }
                 if ((System.currentTimeMillis() - startTime) >= timeLimit * 1000) {
                     process.destroy();
@@ -135,20 +141,24 @@ public class GCCRunner extends CompiledLanguagerRunner{
             e.printStackTrace();
             throw e;
         } finally {
+            outBuf.close();
             if (process.isAlive()) process.destroy();
             testout.close();
             errout.close();
+            System.out.println("Write End!");
+            status = 1;
         }
+        if (runExitValue > 127 || runExitValue < -128) throw new RuntimeErrorException();
 
     }
 
     @Override
-    public void checkRunStatus() {
-
+    public Path getOutputFilePath() {
+        return outputFilePath;
     }
 
     @Override
-    public void getOutPut() {
-
+    public int checkRunStatus() {
+        return status;
     }
 }
