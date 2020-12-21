@@ -104,7 +104,7 @@ public class GCCRunner extends CompiledLanguagerRunner{
         outputStream.close();
 
         BufferedReader testout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        BufferedReader errout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        BufferedReader errout = new BufferedReader(new InputStreamReader(process.getErrorStream()));
         int byteEle;
         String errLine;
         StringBuffer wrongbuf = new StringBuffer();
@@ -115,9 +115,9 @@ public class GCCRunner extends CompiledLanguagerRunner{
             while (true) {
                 if (testout.ready()) {
                     byteEle = testout.read();
-                    System.out.print(byteEle);
+//                    System.out.print(byteEle);
                     outBuf.write(byteEle);
-                    outBuf.flush();
+//                    outBuf.flush();
                     continue;
                 }
                 if (errout.ready()) {
@@ -141,11 +141,12 @@ public class GCCRunner extends CompiledLanguagerRunner{
             e.printStackTrace();
             throw e;
         } finally {
+            outBuf.flush();
             outBuf.close();
             if (process.isAlive()) process.destroy();
             testout.close();
             errout.close();
-            System.out.println("Write End!");
+//            System.out.println("Write End!");
             status = 1;
         }
         if (runExitValue > 127 || runExitValue < -128) throw new RuntimeErrorException();

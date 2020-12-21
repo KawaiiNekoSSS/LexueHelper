@@ -46,7 +46,17 @@ class CompareProcessTest {
                 "C++",Paths.get("test","src.cpp"),
                 "C++",Paths.get("test","std.cpp"));
         process.runMainProcess();
-        assertEquals(process.result, CompareResult.PASS_TEST);
+        assertEquals(process.result.get(), CompareResult.PASS_TEST);
+    }
+
+    @Test
+    @DisplayName("错误的对拍结果")
+    public void testWAPai() throws Exception {
+        CompareProcess process = new CompareProcess("C++", Paths.get("test","dm.cpp"),
+                "C++",Paths.get("test","src1.cpp"),
+                "C++",Paths.get("test","std.cpp"));
+        process.runMainProcess();
+        assertEquals(process.result.get(), CompareResult.WRONG_ANSWER);
     }
 
 }

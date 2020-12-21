@@ -85,10 +85,31 @@ public class RunnerFatory {
         }
     }
 
+    /**
+     * 解释型语言运行器。
+     * TODO。
+     * @param languageName 语言名称
+     * @param srcCodeFileName 源代码文件名
+     * @param outputExcecutableName 输出的exe文件名
+     * @param inputMessage 输入数据
+     * @return 返回运行器。
+     */
+
     private static Optional<InterpretedLanguagerRunner> createInterpretedLanguageRunner
             (String languageName, String srcCodeFileName, String outputExcecutableName,String inputMessage) {
         return Optional.empty();
     }
+
+    /**
+     * 工厂方法，创建运行器
+     * @param languageName 语言名称
+     * @param srcFileName 源代码名称
+     * @param outputExcecutableName 输出的可执行文件名称
+     * @param outputDataName 输出数据名称
+     * @param inputMessage 输入数据
+     * @return 返回一个Runner
+     * @throws CompileErrorException 无法编译则抛出该错误。
+     */
 
     public static IRunner createNewRunner(String languageName, String srcFileName, String outputExcecutableName,
                                           String outputDataName, String inputMessage)
@@ -106,6 +127,12 @@ public class RunnerFatory {
         IRunner myrun = runner.get();
         return myrun;
     }
+
+    /**
+     * 工具函数，判断是否是编译型语言。
+     * @param languageName 语言名称
+     * @return 1表示是编译型，0表示非编译型，-1表示不支持。
+     */
 
     public static int judgeCompileLanguage(String languageName) {
         if (COMPILED_LANGUAGE.contains(languageName.trim().toUpperCase())) {
