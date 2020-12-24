@@ -83,7 +83,7 @@ public class ListGetter {
         s = s.replaceAll("&gt;",">");
         s = s.replaceAll("&amp;","&");
         s = s.replaceAll("&quot;","\"");
-        s = s.replaceAll("\\s?\\n\\s?+","\n");
+        s = s.replaceAll("\\n+","\n");
         return s;
     }
 
