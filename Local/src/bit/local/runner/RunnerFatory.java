@@ -3,6 +3,7 @@ package bit.local.runner;
 import bit.local.compiler.CompileStatus;
 import bit.local.compiler.GCCCompiler;
 import bit.local.compiler.ICompiler;
+import bit.local.compiler.JavaCompiler;
 import bit.local.runner.runtimeexception.CompileErrorException;
 import bit.local.tools.FilesInfoAttainer;
 import bit.local.tools.SourceFileMaker;
@@ -24,7 +25,7 @@ import java.util.Optional;
  */
 public class RunnerFatory {
     private static final List<String> COMPILED_LANGUAGE = List.of("JAVA","C","C++");
-    private static final List<String> INTERPRETED_LANGUAGE = List.of("PYTHON", "LUA");
+    private static final List<String> INTERPRETED_LANGUAGE = List.of("PYTHON", "NODE");
 
 
     /**
@@ -74,6 +75,16 @@ public class RunnerFatory {
                 Path targetDict = compile(new GCCCompiler(srcCodeFileName, outputExcecutableName), srcDict, outputExcecutableName);
                 return Optional.of(new GCCRunner(targetDict.toString(), inputMessage,outputDataName));
             }
+            if (languageName.equals("JAVA")) {
+                String className = outputExcecutableName.replace(".class","").trim();
+                System.out.println(className);
+                if (Files.exists(Paths.get(outputExcecutableName))) {
+                    return Optional.of(new JavaRunner(className,
+                            inputMessage,outputDataName));
+                }
+                compile(new JavaCompiler(srcCodeFileName), srcDict, outputExcecutableName);
+                return Optional.of(new JavaRunner(className, inputMessage,outputDataName));
+            }
             return Optional.empty();
 
         } catch (IOException e) {
@@ -87,17 +98,26 @@ public class RunnerFatory {
 
     /**
      * 解释型语言运行器。
-     * TODO。
      * @param languageName 语言名称
-     * @param srcCodeFileName 源代码文件名
-     * @param outputExcecutableName 输出的exe文件名
+     * @param srcCodeFileName 源代码文件
      * @param inputMessage 输入数据
      * @return 返回运行器。
      */
 
     private static Optional<InterpretedLanguagerRunner> createInterpretedLanguageRunner
-            (String languageName, String srcCodeFileName, String outputExcecutableName,String inputMessage) {
-        return Optional.empty();
+            (String languageName, String srcCodeFileName, String outputDataName, String inputMessage) {
+//        try {
+            Path srcDict = Paths.get(srcCodeFileName);
+            if (languageName.equals("PYTHON")) {
+                return Optional.of(new PythonRunner(srcCodeFileName, inputMessage, outputDataName));
+            } else if (languageName.equals("NODE")) {
+                return Optional.of(new NodeRunner(srcCodeFileName, inputMessage, outputDataName));
+            }
+            return Optional.empty();
+//        } catch (IOException e) {
+//            return Optional.empty();
+//        }
+//        return Optional.empty();
     }
 
     /**
@@ -120,7 +140,7 @@ public class RunnerFatory {
                     srcFileName, outputDataName,outputExcecutableName, inputMessage);
         } else if (INTERPRETED_LANGUAGE.contains(languageName.trim().toUpperCase())) {
             runner = createInterpretedLanguageRunner(languageName.trim().toUpperCase(),
-                    srcFileName, outputExcecutableName, inputMessage);
+                    srcFileName, outputDataName, inputMessage);
         } else {
             runner = Optional.empty();
         }

@@ -9,6 +9,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * @author lire
+ * @title: RunnerFactoryTest
+ * @projectName LexueHelper
+ * @description: 测试对拍器
+ * @date 2020/12/2614:17
+ */
+
 class TextComparatorTest {
 
     @Test

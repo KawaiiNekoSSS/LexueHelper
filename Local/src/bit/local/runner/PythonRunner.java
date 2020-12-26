@@ -1,29 +1,27 @@
 package bit.local.runner;
 
-import bit.local.compiler.CompileStatus;
-import bit.local.compiler.GCCCompiler;
+import bit.local.runner.runtimeexception.CompileErrorException;
 import bit.local.runner.runtimeexception.ExceptionInRun;
 import bit.local.runner.runtimeexception.RuntimeErrorException;
 import bit.local.runner.runtimeexception.TimeLimitExceedException;
-import bit.local.tools.SourceFileMaker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.time.LocalDateTime;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
- * @author lire
- * @date 2020/12/19
- *
- * GCC的运行器。
- *
+ * @author hlq15
+ * @title: PythonRunner
+ * @projectName LexueHelper
+ * @description: 运行Python程序
+ * @date 2020/12/2521:17
  */
-
-public class GCCRunner extends CompiledLanguagerRunner{
+public class PythonRunner extends InterpretedLanguagerRunner{
 
     /**
      * 源代码、输入
@@ -59,46 +57,18 @@ public class GCCRunner extends CompiledLanguagerRunner{
      */
     private int status = 0;
 
-    /**
-     *
-     * @param timeLimit 时间限制
-     * @param memoryLimit  空间限制
-     */
-    public GCCRunner (String runDict, String in, int timeLimit, int memoryLimit) {
-        this.dict = runDict;
-        this.in = in;
-        this.timeLimit = timeLimit;
-        this.memoryLimit = memoryLimit;
-    }
-
-    /**
-     *
-     * @param outputFileName 输出文件名
-     */
-
-    public  GCCRunner (String runDict, String in, String outputFileName) {
+    public PythonRunner(String runDict, String in, String outputFileName) {
         this.dict = runDict;
         this.in = in;
         this.outputFileName = outputFileName;
     }
 
-    /**
-     * 获取编译状态。
-     * @return  编译状态。
-     */
-
-
-    /**
-     * 核心的运行函数。
-     * 会抛出不同的运行状态。
-     * @throws IOException
-     * @throws ExceptionInRun
-     */
-
     @Override
-    public void runcode() throws IOException, ExceptionInRun {
+    public void runcode() throws IOException, ExceptionInRun, CompileErrorException {
         Path path = Paths.get(dict);
-        Process process = new ProcessBuilder(dict).start();
+        String crs[] = new String[]{"python",path.toAbsolutePath().toString()};
+        //Process process = new ProcessBuilder(commands).start();
+        Process process = Runtime.getRuntime().exec(crs);
         long startTime = System.currentTimeMillis();
         OutputStream outputStream = process.getOutputStream();
         outputStream.write(in.getBytes("GBK"));
@@ -148,20 +118,28 @@ public class GCCRunner extends CompiledLanguagerRunner{
             if (process.isAlive()) process.destroy();
             testout.close();
             errout.close();
+            System.out.println(wrongbuf.toString());
+            compileMessage = wrongbuf.toString();
+            if (!compileMessage.isBlank()) throw new CompileErrorException(compileMessage);
 //            System.out.println("Write End!");
             status = 1;
         }
         if (runExitValue > 127 || runExitValue < -128) throw new RuntimeErrorException();
-
     }
 
     @Override
     public Path getOutputFilePath() {
-        return outputFilePath;
+        return null;
     }
 
     @Override
     public int checkRunStatus() {
-        return status;
+        return 0;
+    }
+
+
+    @Override
+    public String getRunMessage() {
+        return compileMessage;
     }
 }

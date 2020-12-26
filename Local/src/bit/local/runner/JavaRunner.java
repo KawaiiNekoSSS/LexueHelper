@@ -1,29 +1,27 @@
 package bit.local.runner;
 
-import bit.local.compiler.CompileStatus;
-import bit.local.compiler.GCCCompiler;
 import bit.local.runner.runtimeexception.ExceptionInRun;
 import bit.local.runner.runtimeexception.RuntimeErrorException;
 import bit.local.runner.runtimeexception.TimeLimitExceedException;
-import bit.local.tools.SourceFileMaker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.time.LocalDateTime;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author lire
- * @date 2020/12/19
- *
- * GCC的运行器。
- *
+ * @title: JavaRunner
+ * @projectName LexueHelper
+ * @description: 运行编译好的class文件
+ * @date 2020/12/2613:34
  */
+public class JavaRunner extends CompiledLanguagerRunner {
 
-public class GCCRunner extends CompiledLanguagerRunner{
 
     /**
      * 源代码、输入
@@ -64,7 +62,7 @@ public class GCCRunner extends CompiledLanguagerRunner{
      * @param timeLimit 时间限制
      * @param memoryLimit  空间限制
      */
-    public GCCRunner (String runDict, String in, int timeLimit, int memoryLimit) {
+    public JavaRunner (String runDict, String in, int timeLimit, int memoryLimit) {
         this.dict = runDict;
         this.in = in;
         this.timeLimit = timeLimit;
@@ -76,7 +74,7 @@ public class GCCRunner extends CompiledLanguagerRunner{
      * @param outputFileName 输出文件名
      */
 
-    public  GCCRunner (String runDict, String in, String outputFileName) {
+    public  JavaRunner (String runDict, String in, String outputFileName) {
         this.dict = runDict;
         this.in = in;
         this.outputFileName = outputFileName;
@@ -98,10 +96,13 @@ public class GCCRunner extends CompiledLanguagerRunner{
     @Override
     public void runcode() throws IOException, ExceptionInRun {
         Path path = Paths.get(dict);
-        Process process = new ProcessBuilder(dict).start();
+//        Process process = new ProcessBuilder(dict).start();
         long startTime = System.currentTimeMillis();
+        String rootPath = path.getParent().toAbsolutePath().toString();
+        String crs[] = new String[]{"powershell","cd",rootPath,";","java",path.getFileName().toString()};
+        Process process = Runtime.getRuntime().exec(crs);
         OutputStream outputStream = process.getOutputStream();
-        outputStream.write(in.getBytes("GBK"));
+        outputStream.write(in.getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
         outputStream.close();
 
@@ -148,6 +149,7 @@ public class GCCRunner extends CompiledLanguagerRunner{
             if (process.isAlive()) process.destroy();
             testout.close();
             errout.close();
+            System.out.println(wrongbuf);
 //            System.out.println("Write End!");
             status = 1;
         }
