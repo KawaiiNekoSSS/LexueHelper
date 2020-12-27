@@ -21,7 +21,7 @@ import java.nio.file.Paths;
  * @description: 运行Python程序
  * @date 2020/12/2521:17
  */
-public class PythonRunner extends InterpretedLanguagerRunner{
+public class PythonRunner extends InterpretedLanguageRunner {
 
     /**
      * 源代码、输入

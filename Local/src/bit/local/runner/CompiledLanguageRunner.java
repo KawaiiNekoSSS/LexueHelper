@@ -5,7 +5,7 @@ import bit.local.compiler.*;
 
 import java.io.IOException;
 
-public abstract class CompiledLanguagerRunner implements IRunner {
+public abstract class CompiledLanguageRunner implements IRunner {
     /**
      * 编译后可运行的文件目录
      */

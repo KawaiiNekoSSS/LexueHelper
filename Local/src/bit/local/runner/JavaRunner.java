@@ -20,7 +20,7 @@ import java.nio.file.Paths;
  * @description: 运行编译好的class文件
  * @date 2020/12/2613:34
  */
-public class JavaRunner extends CompiledLanguagerRunner {
+public class JavaRunner extends CompiledLanguageRunner {
 
 
     /**

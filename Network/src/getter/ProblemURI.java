@@ -10,8 +10,8 @@ import java.net.URI;
  * @date 2020/12/2318:52
  */
 public class ProblemURI {
-    URI uri;
-    String problemName;
+    private URI uri;
+    private String problemName;
 
     public ProblemURI(URI uri, String problemName) {
         this.uri = uri;

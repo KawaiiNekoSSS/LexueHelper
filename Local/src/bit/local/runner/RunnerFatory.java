@@ -5,14 +5,12 @@ import bit.local.compiler.GCCCompiler;
 import bit.local.compiler.ICompiler;
 import bit.local.compiler.JavaCompiler;
 import bit.local.runner.runtimeexception.CompileErrorException;
-import bit.local.tools.FilesInfoAttainer;
 import bit.local.tools.SourceFileMaker;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +59,7 @@ public class RunnerFatory {
      * @throws CompileErrorException 编译错误
      */
 
-    private static Optional<CompiledLanguagerRunner> createCompiledLanguage
+    private static Optional<CompiledLanguageRunner> createCompiledLanguage
             (String languageName, String srcCodeFileName, String outputDataName
                     ,String outputExcecutableName,String inputMessage)
             throws CompileErrorException {
@@ -104,7 +102,7 @@ public class RunnerFatory {
      * @return 返回运行器。
      */
 
-    private static Optional<InterpretedLanguagerRunner> createInterpretedLanguageRunner
+    private static Optional<InterpretedLanguageRunner> createInterpretedLanguageRunner
             (String languageName, String srcCodeFileName, String outputDataName, String inputMessage) {
 //        try {
             Path srcDict = Paths.get(srcCodeFileName);

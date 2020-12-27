@@ -21,7 +21,7 @@ import java.nio.file.Paths;
  * @description: Node.js运行支持
  * @date 2020/12/2614:39
  */
-public class NodeRunner extends InterpretedLanguagerRunner{
+public class NodeRunner extends InterpretedLanguageRunner {
 
     /**
      * 源代码、输入
@@ -64,7 +64,7 @@ public class NodeRunner extends InterpretedLanguagerRunner{
     }
 
     @Override
-    public void runcode() throws IOException, ExceptionInRun, CompileErrorException {
+    public void runcode() throws IOException, ExceptionInRun {
         Path path = Paths.get(dict);
 //        String crs[] = new String[]{"node",path.toAbsolutePath().toString()};
         String crs[] = new String[]{"node", path.toAbsolutePath().toString()};

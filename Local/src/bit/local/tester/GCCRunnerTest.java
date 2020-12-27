@@ -22,9 +22,9 @@ class GCCRunnerTest {
         SourceFileMaker maker = new SourceFileMaker();
         maker.createFile(Paths.get("test", "a.cpp"));
         maker.writeFile("#include<iostream>\nusing namespace std;\n " +
-                "int main(){int a,b; cin >> a >> b; cout << a+b<<endl;}",Paths.get("test", "a.cpp"));
-        var runner = RunnerFatory.createNewRunner("C++", "a.cpp",
-                "a.exe","a.out", "1 1");
+                "int main(){int a,b; cin >> a >> b; cout << a <<endl; cout << b << endl;}",Paths.get("test", "a.cpp"));
+        var runner = RunnerFatory.createNewRunner("C++", "test\\a.cpp",
+                "a.exe","a.out", "1 \n 1");
         runner.runcode();
     }
 
