@@ -1,6 +1,6 @@
 package bit.local.runner;
 
-public abstract class InterpretedLanguagerRunner implements IRunner{
+public abstract class InterpretedLanguageRunner implements IRunner{
     /**
      * 编译后可运行的文件目录
      */

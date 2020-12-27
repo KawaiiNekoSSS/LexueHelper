@@ -1,11 +1,8 @@
 package bit.local.runner;
 
-import bit.local.compiler.CompileStatus;
-import bit.local.compiler.GCCCompiler;
 import bit.local.runner.runtimeexception.ExceptionInRun;
 import bit.local.runner.runtimeexception.RuntimeErrorException;
 import bit.local.runner.runtimeexception.TimeLimitExceedException;
-import bit.local.tools.SourceFileMaker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.time.LocalDateTime;
 
 /**
  * @author lire
@@ -23,7 +19,7 @@ import java.time.LocalDateTime;
  *
  */
 
-public class GCCRunner extends CompiledLanguagerRunner{
+public class GCCRunner extends CompiledLanguageRunner {
 
     /**
      * 源代码、输入

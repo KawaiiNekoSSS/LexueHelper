@@ -11,8 +11,8 @@ import java.net.URL;
  * @date 2020/12/2217:27
  */
 public class LexueCourseInfo {
-    URI uri;
-    String name;
+    private URI uri;
+    private String name;
 
     public LexueCourseInfo(URI uri, String name) {
         this.uri = uri;

@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  */
 public class ListGetter {
 
-    HttpClient client;
-    String cookie;
+    private HttpClient client;
+    private String cookie;
     public static final String MY_COURSE_URL = "http://lexue.bit.edu.cn/my/";
 
 

@@ -45,4 +45,14 @@ public class RunnerFactoryTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void GCCRunnerTest() {
+        try {
+            var runner = RunnerFatory.createNewRunner("C++", "test\\src.cpp",
+                    "test\\src.exe", "own.txt","1 \n 1");
+            runner.runcode();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
