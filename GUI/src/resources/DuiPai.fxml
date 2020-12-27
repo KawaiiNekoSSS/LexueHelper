@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.duiPaiController">
+   <children>
+      <Button onAction="#submit" layoutX="370.0" layoutY="514.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="60.0" text="提交" />
+      <GridPane layoutX="530.0" layoutY="86.0" prefHeight="389.0" prefWidth="215.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ChoiceBox fx:id="dmLanguageChoice" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="C++"/>
+                        <String fx:value="Java" />
+                        <String fx:value="Node" />
+                        <String fx:value="Python" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label text="样例生成代码" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <TextArea fx:id="dmCode" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="56.0" layoutY="86.0" prefHeight="389.0" prefWidth="215.0">
+         <children>
+            <ChoiceBox fx:id="selfLanguageChoice" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="C++"/>
+                        <String fx:value="Java" />
+                        <String fx:value="Node" />
+                        <String fx:value="Python" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label text="你的代码" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <TextArea fx:id="selfCode" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <GridPane layoutX="293.0" layoutY="86.0" prefHeight="389.0" prefWidth="215.0">
+         <children>
+            <ChoiceBox fx:id="paiLanguageChoice" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" >
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="C++"/>
+                        <String fx:value="Java" />
+                        <String fx:value="Node" />
+                        <String fx:value="Python" />
+                    </FXCollections>
+                </items>
+            </ChoiceBox>
+            <Label text="标准代码" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <TextArea fx:id="paiCode" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+         </children>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <Button onAction="#goBack" layoutX="30.0" layoutY="24.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="52.0" text="返回" />
+   </children>
+</AnchorPane>

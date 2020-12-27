@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <GridPane alignment="BOTTOM_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.defaultController">
    <columnConstraints>
-      <ColumnConstraints halignment="CENTER" percentWidth="40.0" />
-      <ColumnConstraints halignment="CENTER" percentWidth="40.0" />
+      <ColumnConstraints halignment="CENTER" percentWidth="30.0" />
+      <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+      <ColumnConstraints halignment="CENTER" percentWidth="30.0" />
    </columnConstraints>
    <rowConstraints>
        <RowConstraints percentHeight="50.0" valignment="CENTER" />
@@ -13,8 +16,9 @@
       <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="BOTTOM" />
    </rowConstraints>
    <children>
-      <Button onAction="#showLocalSubmitScene" fx:id="localSubmitButton" mnemonicParsing="false" prefHeight="120.0" prefWidth="200.0" text="本地提交" />
-      <Button fx:id="lexueSubmitButton" mnemonicParsing="false" prefHeight="120.0" prefWidth="200.0" text="乐学提交" GridPane.columnIndex="1" />
-      <Label fx:id="timeNow" prefHeight="20.0" prefWidth="180.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <Button fx:id="localSubmitButton" mnemonicParsing="false" onAction="#showLocalSubmitScene" prefHeight="100.0" prefWidth="150.0" text="本地提交" />
+      <Button fx:id="lexueSubmitButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="乐学提交" GridPane.columnIndex="2" />
+      <Label fx:id="timeNow" prefHeight="20.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <Button fx:id="duiPaiButton" onAction="#showDuiPaiScene" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="对拍测试" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

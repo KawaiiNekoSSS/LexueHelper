@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="200" prefWidth="300" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.resultWindowController">
+   <children>
+      <Label fx:id="resultLabel" alignment="CENTER" layoutX="50.0" layoutY="33.0" prefHeight="40.0" prefWidth="200.0" textAlignment="CENTER">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="wrongTest" alignment="CENTER" layoutX="25.0" layoutY="91.0" prefHeight="40.0" prefWidth="250.0" />
+      <Button onAction="#close" layoutX="125.0" layoutY="147.0" mnemonicParsing="false" text="确认" />
+   </children>
+</AnchorPane>

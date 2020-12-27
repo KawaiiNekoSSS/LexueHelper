@@ -1,9 +1,12 @@
 package main;
 
+import bit.local.stdcompare.CompareProcess;
+import bit.local.stdcompare.CompareResult;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -45,6 +48,41 @@ public class Main extends Application {
 
         primaryStage.setTitle("本地提交测试");
         primaryStage.setScene(scene);
+    }
+
+    //显示对拍界面
+    public void showDuiPaiScene() throws IOException{
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/DuiPai.fxml"));
+        AnchorPane root = (AnchorPane) loader.load();
+        duiPaiController controller = loader.getController();
+        controller.setMain(this);
+        Scene scene = new Scene(root, 800, 600);
+
+        primaryStage.setTitle("对拍测试");
+        primaryStage.setScene(scene);
+    }
+
+    // 打开结果窗体
+    public void openResultWindow(CompareResult result) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/result.fxml"));
+            AnchorPane root = (AnchorPane) loader.load();
+            Stage newStage = new Stage();
+            resultWindowController controller = loader.getController();
+            controller.init(this, newStage);
+
+            Scene scene = new Scene(root);
+
+            controller.setMessage(result);
+
+
+            newStage.setScene(scene);
+            newStage.setTitle("对拍结果");
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
