@@ -144,7 +144,7 @@ public class GCCRunner extends CompiledLanguageRunner {
             if (process.isAlive()) process.destroy();
             testout.close();
             errout.close();
-//            System.out.println("Write End!");
+            System.out.println("Write End!");
             status = 1;
         }
         if (runExitValue > 127 || runExitValue < -128) throw new RuntimeErrorException();
