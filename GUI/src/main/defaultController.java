@@ -1,11 +1,11 @@
 package main;
 
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import models.TimeModel;
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -54,18 +54,3 @@ public class defaultController implements Initializable {
 }
 
 
-class TimeModel {
-    private StringProperty time = new SimpleStringProperty();
-
-    public String getTime() {
-        return time.get();
-    }
-
-    public StringProperty timeProperty() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time.set(time);
-    }
-}
