@@ -22,15 +22,32 @@ import java.util.regex.Pattern;
  */
 public class ListGetter {
 
-    private HttpClient client;
-    private String cookie;
+    /**
+     * 用于连接的客户端
+     */
+    private final HttpClient client;
+    /**
+     * 用于连接的cookie
+     */
+    private final String cookie;
+    /**
+     * 课程URL
+     */
     public static final String MY_COURSE_URL = "http://lexue.bit.edu.cn/my/";
 
-
+    /**
+     * 构造器
+     * @param cookie 使用的cookie
+     */
     public ListGetter(String cookie) {
         client = ConnectorFactory.createClient();
         this.cookie = cookie;
     }
+
+    /**
+     * 获取课程列表
+     * @return 课程列表
+     */
 
     public Optional<List<LexueCourseInfo>> getCourseList() {
         try {
@@ -54,6 +71,12 @@ public class ListGetter {
         }
     }
 
+    /**
+     * 获取问题列表的List
+     * @param info 课程信息
+     * @return 课程URI列表
+     */
+
     public Optional<List<ProblemURI>> getProblemListForCourse(LexueCourseInfo info) {
         try {
             var request = ConnectorFactory.createGetRequest(info.getUri(),
@@ -76,6 +99,12 @@ public class ListGetter {
         }
     }
 
+    /**
+     * 转换html文件内容
+     * @param s 输入字符串
+     * @return 转换后结果
+     */
+
     public static String parseContent(String s) {
         s = s.replaceAll("</p>","\n");
         s = s.replaceAll("<.*?>", "");
@@ -87,6 +116,12 @@ public class ListGetter {
         return s;
     }
 
+    /**
+     * 转换时间日期结果
+     * @param s 日期字符串
+     * @return 日期
+     */
+
     public static LocalDate convertDate(String s) {
         Pattern pattern = Pattern.compile("(\\d+)年(\\d+)月(\\d+)日.*(\\d+):(\\d+)");
         Matcher matcher = pattern.matcher(s);
@@ -96,6 +131,12 @@ public class ListGetter {
         int day = Integer.parseInt(matcher.group(3));
         return LocalDate.of(year, month, day);
     }
+
+    /**
+     * 获取问题
+     * @param uri 问题的地址
+     * @return 返回一个Problem
+     */
 
     public Optional<Problem> getProblem(ProblemURI uri) {
         try {

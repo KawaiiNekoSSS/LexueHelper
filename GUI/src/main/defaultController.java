@@ -13,6 +13,13 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author neko
+ * @title: defaultControlle
+ * @projectName LexueHelper
+ * @description: 基本控制器
+ * @date 2020/12/2317:46
+ */
 
 public class defaultController implements Initializable {
 
@@ -34,6 +41,9 @@ public class defaultController implements Initializable {
         updateTime();
     }
 
+    /**
+     * 更新时间
+     */
     private void updateTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         new Thread(() -> {

@@ -11,7 +11,17 @@ import java.net.URL;
  * @date 2020/12/2217:27
  */
 public class LexueCourseInfo {
+
+    /**
+     * 课程的URI
+     */
+
     private URI uri;
+
+    /**
+     * 课程的名称
+     */
+
     private String name;
 
     public LexueCourseInfo(URI uri, String name) {

@@ -13,10 +13,9 @@ import java.nio.file.*;
 
 /**
  * @author lire
- * @date 2020/12/19
- *
- * GCC的运行器。
- *
+ * @title: GCCRunner
+ * @projectName LexueHelper
+ * @description: 运行C++文件
  */
 
 public class GCCRunner extends CompiledLanguageRunner {

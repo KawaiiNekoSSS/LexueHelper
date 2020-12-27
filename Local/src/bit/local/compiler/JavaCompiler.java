@@ -12,10 +12,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author hlq15
+ * @author lire
  * @title: JavaCompiler
  * @projectName LexueHelper
- * @description: TODO
+ * @description: 编译java文件
  * @date 2020/12/2523:48
  */
 public class JavaCompiler implements ICompiler {

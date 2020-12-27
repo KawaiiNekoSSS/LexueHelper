@@ -1,10 +1,10 @@
 package bit.local.runner.runtimeexception;
 
 /**
- * @author hlq15
+ * @author lire
  * @title: RunAnswerException
  * @projectName LexueHelper
- * @description: TODO
+ * @description: Wrong Answer
  * @date 2020/12/2021:53
  */
 public class WrongAnswerException extends ExceptionInRun {

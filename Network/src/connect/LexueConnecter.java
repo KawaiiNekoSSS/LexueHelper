@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * @author lire
  * @title: LexueConnecter
  * @projectName LexueHelper
- * @description: 用来连接到乐学的连接器==
+ * @description: 用来连接到乐学的连接器
  * @date 2020/12/2216:12
  */
 public class LexueConnecter {

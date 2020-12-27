@@ -7,6 +7,13 @@ import java.nio.file.*;
 
 import bit.local.tools.SourceFileMaker;
 
+/**
+ * @author lire
+ * @title: GCC编译器
+ * @projectName LexueHelper
+ * @description: 编译GCC文件
+ */
+
 public class GCCCompiler implements ICompiler {
 
     public static final String DEFAULT_COMPILE_ARGS = "-Wall";
@@ -26,8 +33,8 @@ public class GCCCompiler implements ICompiler {
 
     /**
      *
-     * @param srcFileName
-     * @param targetFileName
+     * @param srcFileName 文件名
+     * @param targetFileName 输出文件名
      */
 
     public GCCCompiler(String srcFileName, String targetFileName) {
@@ -124,11 +131,19 @@ public class GCCCompiler implements ICompiler {
         this.compile(srcFile, DEFAULT_COMPILE_ARGS);
     }
 
+    /**
+     * 检查编译状态
+     * @return 编译状态
+     */
+
     @Override
     public CompileStatus checkCompileStatus() {
         return this.status;
     }
 
+    /**
+     * 检查状态
+     */
 
     void checkStatus() {
         if (Files.exists(targetDict)) {

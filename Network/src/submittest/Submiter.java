@@ -2,7 +2,7 @@ package submittest;
 
 import bit.local.runner.RunnerFatory;
 import bit.local.runner.runtimeexception.*;
-import bit.local.stdcompare.CompareResult;
+import bit.local.stdcompare.*;
 import bit.local.tools.FilesInfoAttainer;
 import bit.local.tools.IgnoreMode;
 import bit.local.tools.TextComparator;
@@ -29,6 +29,7 @@ public class Submiter {
 
     public CompareResult commitTest(String languageName, String srcFileName, String outputExecutableName,
                                     String outputDataName) {
+
         for(var data : problem.getDataList()) {
             try {
                 var runner = RunnerFatory.createNewRunner(languageName, srcFileName,

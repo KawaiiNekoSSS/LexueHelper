@@ -9,6 +9,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author neko
+ * @title: Main
+ * @projectName LexueHelper
+ * @description: 核心线程
+ */
+
 public class Main extends Application {
 
     private Stage primaryStage;
@@ -19,7 +26,10 @@ public class Main extends Application {
         showDefaultWindow();
     }
 
-    //显示主窗体主界面
+    /**
+     * 显示主窗体主界面
+     */
+
     public void showDefaultWindow() throws IOException{
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/default.fxml"));
@@ -34,7 +44,9 @@ public class Main extends Application {
 
     }
 
-    //显示本地提交界面
+    /**
+     * 显示本地提交界面
+     */
     public void showLocalSubmitScene() throws IOException{
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/LocalSubmit.fxml"));

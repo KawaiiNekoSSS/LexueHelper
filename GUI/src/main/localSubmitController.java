@@ -14,7 +14,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
-
+/**
+ * @author neko
+ * @title: localSubmitController
+ * @projectName LexueHelper
+ * @description: 本地提交的控制器
+ */
 public class localSubmitController implements Initializable {
 
     //回调
@@ -46,6 +51,10 @@ public class localSubmitController implements Initializable {
     public void goBack() throws IOException {
         main.showDefaultWindow();
     }
+
+    /**
+     * 提交操作
+     */
 
     @FXML
     public void submit() throws IOException {

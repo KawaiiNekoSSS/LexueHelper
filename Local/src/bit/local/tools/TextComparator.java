@@ -1,8 +1,19 @@
 package bit.local.tools;
-
+/**
+ * @author lire
+ * @title: TextComparator
+ * @projectName LexueHelper
+ * @description: 比较文本
+ */
 public class TextComparator {
     private IgnoreMode mode;
     private String ownText;
+
+    /**
+     * 构造器。
+     * @param mode 忽略模式
+     * @param ownText 自身的文本
+     */
 
     public TextComparator(IgnoreMode mode, String ownText) {
         this.mode = mode;
@@ -11,7 +22,6 @@ public class TextComparator {
     public TextComparator(String ownText) {
         this(IgnoreMode.IGNORE_NO_BLANK, ownText);
     }
-
     public IgnoreMode getMode() {
         return mode;
     }
@@ -41,6 +51,12 @@ public class TextComparator {
         String _other = other.replaceAll("\\s", "");
         return _text.equals(_other);
     }
+
+    /**
+     * 比较的函数
+     * @param other 比对对象字符串
+     * @return 是否能通过比较
+     */
 
     public boolean compareWith(String other) {
         switch (mode) {

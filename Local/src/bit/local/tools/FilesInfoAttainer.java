@@ -9,6 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+/**
+ * @author lire
+ * @title: FilesInfoAttainer
+ * @projectName LexueHelper
+ * @description: 获取文件信息和比对文件的工具类
+ */
+
 public class FilesInfoAttainer {
     public static String readStringFromFiles(Path path) throws IOException {
         try {
