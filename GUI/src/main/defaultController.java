@@ -56,6 +56,11 @@ public class defaultController implements Initializable {
     public void showDuiPaiScene() throws IOException {
         main.showDuiPaiScene();
     }
+
+    @FXML
+    public void showLexueSubmitScene() throws IOException {
+        main.showLexueSubmitScene();
+    }
 }
 
 

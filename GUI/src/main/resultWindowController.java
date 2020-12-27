@@ -28,6 +28,10 @@ public class resultWindowController {
     @FXML
     Label wrongTest;
 
+    public void setMessage(String msg) {
+        resultLabel.setText(msg);
+    }
+
 
     public void setMessage(CompareResult result) throws IOException {
         resultLabel.setText(ResultMap(result));

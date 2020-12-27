@@ -50,6 +50,19 @@ public class Main extends Application {
         primaryStage.setScene(scene);
     }
 
+    //显示乐学提交界面
+    public void showLexueSubmitScene() throws IOException{
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/LexueSubmit.fxml"));
+        AnchorPane root = (AnchorPane) loader.load();
+        lexueSubmitController controller = loader.getController();
+        controller.setMain(this);
+        Scene scene = new Scene(root, 800, 600);
+
+        primaryStage.setTitle("乐学提交测试");
+        primaryStage.setScene(scene);
+    }
+
     //显示对拍界面
     public void showDuiPaiScene() throws IOException{
 
@@ -61,6 +74,27 @@ public class Main extends Application {
 
         primaryStage.setTitle("对拍测试");
         primaryStage.setScene(scene);
+    }
+
+    public void openResultWindow(String result) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/result.fxml"));
+            AnchorPane root = (AnchorPane) loader.load();
+            Stage newStage = new Stage();
+            resultWindowController controller = loader.getController();
+            controller.init(this, newStage);
+
+            Scene scene = new Scene(root);
+
+            controller.setMessage(result);
+
+
+            newStage.setScene(scene);
+            newStage.setTitle("对拍结果");
+            newStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // 打开结果窗体
@@ -78,7 +112,7 @@ public class Main extends Application {
 
 
             newStage.setScene(scene);
-            newStage.setTitle("对拍结果");
+            newStage.setTitle("提交结果");
             newStage.show();
         } catch (IOException e) {
             e.printStackTrace();

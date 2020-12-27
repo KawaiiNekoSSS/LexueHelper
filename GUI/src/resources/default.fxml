@@ -17,7 +17,7 @@
    </rowConstraints>
    <children>
       <Button fx:id="localSubmitButton" mnemonicParsing="false" onAction="#showLocalSubmitScene" prefHeight="100.0" prefWidth="150.0" text="本地提交" />
-      <Button fx:id="lexueSubmitButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="乐学提交" GridPane.columnIndex="2" />
+      <Button fx:id="lexueSubmitButton" mnemonicParsing="false" onAction="#showLexueSubmitScene" prefHeight="100.0" prefWidth="150.0" text="乐学提交" GridPane.columnIndex="2" />
       <Label fx:id="timeNow" prefHeight="20.0" prefWidth="180.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <Button fx:id="duiPaiButton" onAction="#showDuiPaiScene" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="对拍测试" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
    </children>

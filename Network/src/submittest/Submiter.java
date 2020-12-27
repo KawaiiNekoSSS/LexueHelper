@@ -41,7 +41,7 @@ public class Submiter {
 //                maker.createFile(path);
 //                maker.writeFile(data.getOutputData(), path);
                 if (!comparator.compareWith(FilesInfoAttainer.readStringFromFiles(
-                        Paths.get("SourceCode", outputDataName)))) {
+                        Paths.get(srcFileName).getParent().resolve(outputDataName)))) {
                     throw new WrongAnswerException();
                 }
             } catch (ExceptionInRun | IOException e) {
