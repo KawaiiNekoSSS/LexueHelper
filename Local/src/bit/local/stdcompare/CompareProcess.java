@@ -31,7 +31,7 @@ public class CompareProcess {
 
     private String data_maker_language;
     private Path data_maker_path;
-    private Path data_maker_exe_path;
+    private Optional<Path> data_maker_exe_path = Optional.empty();
 
     /**
      * 待测试文件的语言名称、所在路径和生成的exe路径。
@@ -39,7 +39,7 @@ public class CompareProcess {
 
     private String own_src_language;
     private Path own_src_path;
-    private Path own_src_exe_path;
+    private Optional<Path> own_src_exe_path = Optional.empty();
 
     /**
      * 标准文件的语言名称、所在路径和生成的exe路径
@@ -47,7 +47,7 @@ public class CompareProcess {
 
     private String std_src_language;
     private Path std_src_path;
-    private Path std_src_exe_path;
+    private Optional<Path> std_src_exe_path = Optional.empty();
 
     /**
      * 文本比对忽略模式
@@ -125,16 +125,16 @@ public class CompareProcess {
         this.std_src_path = std_src_path;
         try {
             if (judgeCompileLanguage(data_maker_language) == 1) {
-                data_maker_exe_path = removeSameRootEXE(data_maker_path, data_maker_language);
+                data_maker_exe_path = Optional.of(removeSameRootEXE(data_maker_path, data_maker_language));
             }
             if (judgeCompileLanguage(own_src_language) == 1) {
-                own_src_exe_path = removeSameRootEXE(own_src_path, own_src_language);
+                own_src_exe_path = Optional.of(removeSameRootEXE(own_src_path, own_src_language));
             }
             if (judgeCompileLanguage(std_src_language) == 1) {
-                std_src_exe_path = removeSameRootEXE(std_src_path, std_src_language);
+                std_src_exe_path = Optional.of(removeSameRootEXE(std_src_path, std_src_language));
             }
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
@@ -148,26 +148,26 @@ public class CompareProcess {
             System.out.println("第" + i + "组数据");
             try {
                 var dm_runner = RunnerFatory.createNewRunner(data_maker_language, data_maker_path.toString(),
-                        data_maker_exe_path.toString(), "input.txt", "");
+                        data_maker_exe_path.orElse(Paths.get("")).toString(), "input.txt", "");
                 dm_runner.runcode();
 //                while (dm_runner.checkRunStatus() == 0);
 //                Thread.sleep(500);
-                String test_data = FilesInfoAttainer.readStringFromFiles(Paths.get("test","input.txt"));
+                String test_data = FilesInfoAttainer.readStringFromFiles(Paths.get("DuiPaiFolder","input.txt"));
 //                System.out.println(test_data);
                 var std_runner = RunnerFatory.createNewRunner(std_src_language, std_src_path.toString(),
-                        std_src_exe_path.toString(), "std.txt", test_data);
+                        std_src_exe_path.orElse(Paths.get("")).toString(), "std.txt", test_data);
 //                System.out.println(std_src_language + " " + std_src_path + " " + std_src_exe_path + " " + test_data);
                 std_runner.runcode();
 //                while (std_runner.checkRunStatus() == 0);
 //                Thread.sleep(100);
                 var own_runner = RunnerFatory.createNewRunner(own_src_language, own_src_path.toString(),
-                        own_src_exe_path.toString(), "own.txt", test_data);
+                        own_src_exe_path.orElse(Paths.get("")).toString(), "own.txt", test_data);
 //                System.out.println(own_src_language + " " + own_src_path + " " + own_src_exe_path + " " + test_data);
                 own_runner.runcode();
 //                while (own_runner.checkRunStatus() == 0);
 //                Thread.sleep(100);
-                boolean compareResult = FilesInfoAttainer.judgeFileEquals(Paths.get("test","own.txt"),
-                        Paths.get("test","std.txt"),ignoreMode);
+                boolean compareResult = FilesInfoAttainer.judgeFileEquals(Paths.get("DuiPaiFolder","own.txt"),
+                        Paths.get("DuiPaiFolder","std.txt"),ignoreMode);
                 if (compareResult == false) {
                     throw new WrongAnswerException();
                 }
@@ -184,6 +184,7 @@ public class CompareProcess {
                 return;
             } catch (IOException e) {
                 result = Optional.of(CompareResult.UNKNOWN_ERROR);
+                e.printStackTrace();
                 return;
             } catch (InterruptedException e) {
                 e.printStackTrace();

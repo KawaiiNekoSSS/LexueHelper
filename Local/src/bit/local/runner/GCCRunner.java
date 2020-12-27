@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
+import java.util.List;
 
 /**
  * @author lire
@@ -93,7 +94,12 @@ public class GCCRunner extends CompiledLanguageRunner {
     @Override
     public void runcode() throws IOException, ExceptionInRun {
         Path path = Paths.get(dict);
+        System.out.println(dict);
+        String rootPath = path.getParent().toAbsolutePath().toString();
+        String crs[] = new String[]{"powershell","cd",rootPath,";",dict};
+//        System.out.println(List.of(crs));
         Process process = new ProcessBuilder(dict).start();
+//        Process process = Runtime.getRuntime().exec(crs);
         long startTime = System.currentTimeMillis();
         OutputStream outputStream = process.getOutputStream();
         outputStream.write(in.getBytes("GBK"));
@@ -107,6 +113,7 @@ public class GCCRunner extends CompiledLanguageRunner {
         StringBuffer wrongbuf = new StringBuffer();
 
         outputFilePath = Paths.get(dict).getParent().resolve(outputFileName);
+        System.out.println(outputFilePath);
         var outBuf = Files.newBufferedWriter(outputFilePath, StandardCharsets.UTF_8);
         try {
             while (true) {
