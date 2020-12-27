@@ -157,6 +157,10 @@ public class lexueSubmitController{
             fileMaker.createFile(Path.of("LexueFolder", "code.cpp"));
             fileMaker.writeFile(codeText.getText(), Path.of("LexueFolder/code.cpp"));
         }
+        else if (languageIndex == 1) {
+            fileMaker.createFile(Path.of("LexueFolder", "code.java"));
+            fileMaker.writeFile(codeText.getText(), Path.of("LexueFolder/code.java"));
+        }
         else if (languageIndex == 2) {
             fileMaker.createFile(Path.of("LexueFolder", "code.js"));
             fileMaker.writeFile(codeText.getText(), Path.of("LexueFolder/code.js"));

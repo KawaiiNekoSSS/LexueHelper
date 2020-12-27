@@ -32,6 +32,7 @@ public class Submiter {
 
         for(var data : problem.getDataList()) {
             try {
+                CompareProcess.removeSameRootEXE(Paths.get(srcFileName), languageName);
                 var runner = RunnerFatory.createNewRunner(languageName, srcFileName,
                         outputExecutableName ,outputDataName, data.getInoutData());
                 runner.runcode();

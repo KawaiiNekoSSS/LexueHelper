@@ -5,6 +5,9 @@ import bit.local.runner.runtimeexception.*;
 import bit.local.tools.FilesInfoAttainer;
 import bit.local.tools.IgnoreMode;
 import bit.local.tools.SourceFileMaker;
+import javafx.scene.control.Label;
+import javafx.application.Platform;
+
 import static bit.local.runner.RunnerFatory.*;
 
 import java.io.IOException;
@@ -145,6 +148,66 @@ public class CompareProcess {
 
     public void runMainProcess() {
         for (int i = 1; i <= circleTime; ++i) {
+            System.out.println("第" + i + "组数据");
+            try {
+                var dm_runner = RunnerFatory.createNewRunner(data_maker_language, data_maker_path.toString(),
+                        data_maker_exe_path.orElse(Paths.get("")).toString(), "input.txt", "");
+                dm_runner.runcode();
+//                while (dm_runner.checkRunStatus() == 0);
+//                Thread.sleep(500);
+                String test_data = FilesInfoAttainer.readStringFromFiles(Paths.get("DuiPaiFolder","input.txt"));
+//                System.out.println(test_data);
+                var std_runner = RunnerFatory.createNewRunner(std_src_language, std_src_path.toString(),
+                        std_src_exe_path.orElse(Paths.get("")).toString(), "std.txt", test_data);
+//                System.out.println(std_src_language + " " + std_src_path + " " + std_src_exe_path + " " + test_data);
+                std_runner.runcode();
+//                while (std_runner.checkRunStatus() == 0);
+//                Thread.sleep(100);
+                var own_runner = RunnerFatory.createNewRunner(own_src_language, own_src_path.toString(),
+                        own_src_exe_path.orElse(Paths.get("")).toString(), "own.txt", test_data);
+//                System.out.println(own_src_language + " " + own_src_path + " " + own_src_exe_path + " " + test_data);
+                own_runner.runcode();
+//                while (own_runner.checkRunStatus() == 0);
+//                Thread.sleep(100);
+                boolean compareResult = FilesInfoAttainer.judgeFileEquals(Paths.get("DuiPaiFolder","own.txt"),
+                        Paths.get("DuiPaiFolder","std.txt"),ignoreMode);
+                if (compareResult == false) {
+                    throw new WrongAnswerException();
+                }
+                Thread.sleep(50);
+            } catch (ExceptionInRun e) {
+                if (e instanceof CompileErrorException)
+                    result = Optional.of(CompareResult.COMPILE_ERROR);
+                else if (e instanceof TimeLimitExceedException)
+                    result = Optional.of(CompareResult.TIME_LIMIT_EXCEED);
+                else if (e instanceof RuntimeErrorException)
+                    result = Optional.of(CompareResult.RUNTIME_ERROR);
+                else if (e instanceof WrongAnswerException)
+                    result = Optional.of(CompareResult.WRONG_ANSWER);
+                return;
+            } catch (IOException e) {
+                result = Optional.of(CompareResult.UNKNOWN_ERROR);
+                e.printStackTrace();
+                return;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        result = Optional.of(CompareResult.PASS_TEST);
+    }
+
+
+    public void runMainProcess(Label progress) {
+        for (int i = 1; i <= circleTime; ++i) {
+            int finalI = i;
+            Platform.runLater(() -> {
+                try {
+                    progress.setText("对拍进度："+ finalI + "/" + circleTime);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
             System.out.println("第" + i + "组数据");
             try {
                 var dm_runner = RunnerFatory.createNewRunner(data_maker_language, data_maker_path.toString(),

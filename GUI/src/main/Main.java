@@ -35,13 +35,13 @@ public class Main extends Application {
 
     public void showDefaultWindow() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/default.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/resources/default.fxml"));
         GridPane root = (GridPane)loader.load();
         defaultController controller = loader.getController();
         controller.setMain(this);
         Scene scene = new Scene(root, 800, 600);
 
-        primaryStage.setTitle("欢迎来到hhm的OJ");
+        primaryStage.setTitle("meow~");
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -52,7 +52,7 @@ public class Main extends Application {
      */
     public void showLocalSubmitScene() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/LocalSubmit.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/resources/LocalSubmit.fxml"));
         GridPane root = (GridPane)loader.load();
         localSubmitController controller = loader.getController();
         controller.setMain(this);
@@ -65,7 +65,7 @@ public class Main extends Application {
     //显示乐学提交界面
     public void showLexueSubmitScene() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/LexueSubmit.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/resources/LexueSubmit.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
         lexueSubmitController controller = loader.getController();
         controller.setMain(this);
@@ -78,7 +78,7 @@ public class Main extends Application {
     //显示对拍界面
     public void showDuiPaiScene() throws IOException{
 
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/DuiPai.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/resources/DuiPai.fxml"));
         AnchorPane root = (AnchorPane) loader.load();
         duiPaiController controller = loader.getController();
         controller.setMain(this);
@@ -90,7 +90,7 @@ public class Main extends Application {
 
     public void openResultWindow(String result) {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/result.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/resources/result.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage newStage = new Stage();
             resultWindowController controller = loader.getController();
@@ -112,7 +112,7 @@ public class Main extends Application {
     // 打开结果窗体
     public void openResultWindow(CompareResult result) {
         try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("../resources/result.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("/resources/result.fxml"));
             AnchorPane root = (AnchorPane) loader.load();
             Stage newStage = new Stage();
             resultWindowController controller = loader.getController();

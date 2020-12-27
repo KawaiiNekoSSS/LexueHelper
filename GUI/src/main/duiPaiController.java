@@ -6,6 +6,7 @@ import bit.local.tools.SourceFileMaker;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
@@ -41,6 +42,9 @@ public class duiPaiController {
     private ChoiceBox paiLanguageChoice;
     @FXML
     private ChoiceBox dmLanguageChoice;
+
+    @FXML
+    private Label progress;
 
     @FXML
     public void submit() throws IOException {
@@ -93,6 +97,10 @@ public class duiPaiController {
             fileMaker.createFile(Path.of("DuiPaiFolder/" + fileName + ".cpp"));
             fileMaker.writeFile(fileText, Path.of("DuiPaiFolder/" + fileName + ".cpp"));
         }
+        else if (languageIndex == 1) {
+            fileMaker.createFile(Path.of("DuiPaiFolder/" + fileName + ".java"));
+            fileMaker.writeFile(fileText, Path.of("DuiPaiFolder/" + fileName + ".java"));
+        }
         else if (languageIndex == 2) {
             fileMaker.createFile(Path.of("DuiPaiFolder/" + fileName + ".js"));
             fileMaker.writeFile(fileText, Path.of("DuiPaiFolder/" + fileName + ".js"));
@@ -104,14 +112,14 @@ public class duiPaiController {
     }
 
     private Optional<CompareResult> RunCode(int selfLanguageIndex, int paiLanguageIndex, int dmLanguageIndex) {
-        CompareProcess process = new CompareProcess(
+        CompareProcess process = new CompareProcess(20,
                 ChoiceBoxMap(dmLanguageIndex, 0),
                 Paths.get("DuiPaiFolder","dmCode" + ChoiceBoxMap(dmLanguageIndex, 1)),
                 ChoiceBoxMap(selfLanguageIndex, 0),
                 Paths.get("DuiPaiFolder","selfCode" + ChoiceBoxMap(selfLanguageIndex, 1)),
                 ChoiceBoxMap(paiLanguageIndex, 0),
                 Paths.get("DuiPaiFolder","paiCode"+ ChoiceBoxMap(paiLanguageIndex, 1)));
-        process.runMainProcess();
+        process.runMainProcess(progress);
         return process.result;
     }
 

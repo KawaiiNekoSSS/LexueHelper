@@ -95,6 +95,11 @@ public class localSubmitController implements Initializable {
             fileMaker.writeFile(codeText.getText(), Path.of("SourceCode/code.cpp"));
             fileMaker.removeOldFile(Path.of("SourceCode", "code.exe"));
         }
+        else if (languageIndex == 1) {
+            fileMaker.createFile(Path.of("SourceCode", "code.java"));
+            fileMaker.writeFile(codeText.getText(), Path.of("SourceCode/code.java"));
+            fileMaker.removeOldFile(Path.of("SourceCode", "code.class"));
+        }
         else if (languageIndex == 2) {
             fileMaker.createFile(Path.of("SourceCode", "code.js"));
             fileMaker.writeFile(codeText.getText(), Path.of("SourceCode/code.js"));
@@ -116,6 +121,15 @@ public class localSubmitController implements Initializable {
             try {
                 var runner = RunnerFatory.createNewRunner("C++", "SourceCode\\code.cpp",
                         "SourceCode\\code.exe", "output.txt",inputMessage);
+                runner.runcode();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (languageIndex == 1){
+            try {
+                var runner = RunnerFatory.createNewRunner("Java", "SourceCode\\code.java",
+                        "code.class", "output.txt",inputMessage);
                 runner.runcode();
             } catch (Exception e) {
                 e.printStackTrace();
